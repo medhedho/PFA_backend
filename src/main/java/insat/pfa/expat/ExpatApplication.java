@@ -32,7 +32,7 @@ public class ExpatApplication {
 		SpringApplication.run(ExpatApplication.class, args);
 	}
 
-	/*@Bean
+	@Bean
 	CommandLineRunner init(UserRepository repository) {
 		return args -> {
 			repository.deleteAll();
@@ -51,7 +51,7 @@ public class ExpatApplication {
 					.map(v -> repository.save(v))
 					.forEach(System.out::println);
 		};
-	}*/
+	}
 
 	/*@Bean
 	CommandLineRunner init(AdvertRepository repository) {
