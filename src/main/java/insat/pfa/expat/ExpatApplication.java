@@ -11,18 +11,28 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 import java.util.stream.LongStream;
 
+@Controller
 @SpringBootApplication
 public class ExpatApplication {
+
+	@RequestMapping("/")
+	@ResponseBody
+	String home() {
+		return "Hello World!";
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ExpatApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	CommandLineRunner init(UserRepository repository) {
 		return args -> {
 			repository.deleteAll();
@@ -41,7 +51,7 @@ public class ExpatApplication {
 					.map(v -> repository.save(v))
 					.forEach(System.out::println);
 		};
-	}
+	}*/
 
 	/*@Bean
 	CommandLineRunner init(AdvertRepository repository) {
