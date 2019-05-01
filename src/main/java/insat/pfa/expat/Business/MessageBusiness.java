@@ -44,12 +44,12 @@ public class MessageBusiness {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
-    public ResponseEntity<List<Message>> findByUsers(long idUser1,long idUser2)
+    /*public ResponseEntity<List<Message>> findByUsers(long idUser1,long idUser2)
     {
 
         User user1 =userRepository.findById(idUser1).orElse(null);
         User user2 =userRepository.findById(idUser2).orElse(null);
         Message messageUser1=messageRepository
-    }
+    }*/
 
 }

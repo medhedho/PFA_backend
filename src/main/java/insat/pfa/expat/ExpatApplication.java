@@ -11,26 +11,31 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.stream.LongStream;
 
-@Controller
 @SpringBootApplication
 public class ExpatApplication {
-
-	@RequestMapping("/")
-	@ResponseBody
-	String home() {
-		return "Hello World!";
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ExpatApplication.class, args);
 	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	}
+
 
 	/*@Bean
 	CommandLineRunner init(UserRepository repository) {
@@ -39,7 +44,7 @@ public class ExpatApplication {
 			LongStream.range(1, 11)
 					.mapToObj(i -> {
 						User u = new User();
-						u.setName("Rym Kallel");
+						u.setUsername("Rym Kallel");
 						u.setTel("465632652");
 						u.setStatus("User");
 						u.setNativeCountry("Tunisia");
@@ -91,4 +96,18 @@ public class ExpatApplication {
 		};
 	}*/
 
+}
+
+@Configuration
+@EnableJpaAuditing
+class DataJpaConfig {
+
+	@Bean
+	public AuditorAware<User> auditor() {
+		return () -> Optional.ofNullable(SecurityContextHolder.getContext())
+				.map(SecurityContext::getAuthentication)
+				.filter(Authentication::isAuthenticated)
+				.map(Authentication::getPrincipal)
+				.map(User.class::cast);
+	}
 }

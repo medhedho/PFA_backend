@@ -30,7 +30,7 @@ public class UserBusiness {
     public ResponseEntity<User> updateUser(long id, User user){
         return userRepository.findById(id)
                 .map(record -> {
-                    record.setName(user.getName());
+                    record.setUsername(user.getUsername());
                     record.setEmail(user.getEmail());
                     record.setAdress(user.getAdress());
                     record.setBirthDate(user.getBirthDate());
