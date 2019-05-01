@@ -43,4 +43,19 @@ public class UserBusiness {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
+    public void addFollowing(Long idUser, Long idUserToFollow){
+
+                    User user=userRepository.findById(idUser).orElse(null);
+                    User userToFollow=userRepository.findById(idUserToFollow).orElse(null);
+                    List<User> list =user.getFollowing();
+                    List<User> listUserToFollow =userToFollow.getFollowers();
+                    list.add(userToFollow);
+                    user.setFollowing(list);
+                    listUserToFollow.add(user);
+                    userToFollow.setFollowers(listUserToFollow);
+                    userRepository.save(user);
+                    userRepository.save(userToFollow);
+
+    }
+
 }

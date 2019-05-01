@@ -36,4 +36,12 @@ public class UserController {
     }
 
 
+    @PutMapping(value = "/{idUser}/Follow/{idUserToFollow}" )
+    public void addFollowing(Long idUser, Long idUserToFollow){
+        userBusiness.addFollowing(idUser,idUserToFollow);
+    }
+
+
+
+
 }

@@ -50,7 +50,7 @@ public class CommentController {
     }
 
     @PostMapping(value="/like/{idComment}/{idUser}")
-    public ResponseEntity<Comment> addLikeToPub(@PathVariable("idComment") long id1, @PathVariable("idUser") long id2){
+    public ResponseEntity<Comment> addLikeToComment(@PathVariable("idComment") long id1, @PathVariable("idUser") long id2){
         return commentBusiness.addLikeToComment(id1,id2);
     }
 

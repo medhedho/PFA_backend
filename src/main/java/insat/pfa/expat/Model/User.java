@@ -38,5 +38,8 @@ public class User implements Serializable{
     @OneToMany
     private List<User> following;
 
+    @OneToMany
+    private List<User> followers;
+
 
 }

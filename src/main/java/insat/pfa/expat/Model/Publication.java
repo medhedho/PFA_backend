@@ -33,6 +33,7 @@ public class Publication implements Serializable{
     @OneToMany
     private List<User> likes;
 
+    @Enumerated(EnumType.STRING)
     private TypePublication type;
 
     @OneToMany
