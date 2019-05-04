@@ -25,7 +25,7 @@ public class Publication implements Serializable{
 
     private String content;
 
-
+    @ElementCollection
     private List<String> photo;
 
     private String video;

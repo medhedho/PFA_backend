@@ -64,4 +64,7 @@ public class PublicationBusiness {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
+   /* public List<Publication> findFollowingPublications(User user) {
+        return publicationRepository.findFollowingPublication(user);
+    }*/
 }

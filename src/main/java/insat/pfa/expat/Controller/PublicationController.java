@@ -2,6 +2,7 @@ package insat.pfa.expat.Controller;
 
 import insat.pfa.expat.Business.PublicationBusiness;
 import insat.pfa.expat.Model.Publication;
+import insat.pfa.expat.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,15 +16,21 @@ public class PublicationController {
     @Autowired
     PublicationBusiness publicationBusiness;
 
-    @GetMapping
+  /*  @GetMapping
     public List findAll(){
         return publicationBusiness.findAll();
     }
-
+*/
     @GetMapping(path = {"/{id}"})
     public ResponseEntity<Publication> findById(@PathVariable long id){
         return publicationBusiness.findById(id);
     }
+
+   //Retourne tous les publications des following d'un utilisateur
+   /* @GetMapping
+    public List findAll(@RequestBody User user){
+        return publicationBusiness.findFollowingPublications(user);
+    }*/
 
     @PostMapping
     public Publication createPublication(@RequestBody Publication publication){

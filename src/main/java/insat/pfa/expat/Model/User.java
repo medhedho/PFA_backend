@@ -43,8 +43,6 @@ public class User implements Serializable, UserDetails {
 
     private String tel;
 
-    private String adress;
-
     private String email;
 
     private String password;
@@ -56,10 +54,11 @@ public class User implements Serializable, UserDetails {
     private String status;
 
     @OneToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
+    //@LazyCollection(LazyCollectionOption.FALSE)
     private List<User> following;
 
     @OneToMany
+    //@LazyCollection(LazyCollectionOption.FALSE)
     private List<User> followers;
 
 

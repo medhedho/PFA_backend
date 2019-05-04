@@ -32,7 +32,7 @@ public class UserBusiness {
                 .map(record -> {
                     record.setUsername(user.getUsername());
                     record.setEmail(user.getEmail());
-                    record.setAdress(user.getAdress());
+
                     record.setBirthDate(user.getBirthDate());
                     record.setNativeCountry(user.getNativeCountry());
                     record.setStatus(user.getStatus());

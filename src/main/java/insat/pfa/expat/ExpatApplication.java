@@ -57,7 +57,7 @@ public class ExpatApplication {
 					.forEach(System.out::println);
 		};
 	}*/
-
+/*
 	@Bean
 	CommandLineRunner init(AdvertRepository repository) {
 		return args -> {
@@ -75,7 +75,7 @@ public class ExpatApplication {
 					.forEach(System.out::println);
 
 		};
-	}
+	}*/
 /*
 	@Bean
 	CommandLineRunner init(PublicationRepository repository) {
