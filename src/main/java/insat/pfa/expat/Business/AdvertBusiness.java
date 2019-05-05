@@ -21,7 +21,8 @@ public class AdvertBusiness {
     @Autowired
     UserRepository userRepository;
 
-    public Advert createAdvert(Advert advert){
+    public Advert createAdvert(Advert a, long userid){
+        Advert advert = new Advert(userRepository.getOne(userid),a.getContent(),a.getLocation(),a.getType());
         return advertRepository.save(advert);
     }
 

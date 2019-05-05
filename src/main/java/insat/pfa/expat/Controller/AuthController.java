@@ -1,5 +1,6 @@
 package insat.pfa.expat.Controller;
 
+import insat.pfa.expat.Model.User;
 import insat.pfa.expat.Repository.UserRepository;
 import insat.pfa.expat.Security.JWT.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,10 @@ public class AuthController {
             String username = data.getUsername();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
             String token = jwtTokenProvider.createToken(username, this.users.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username " + username + "not found")).getRoles());
+            User m = users.findByUsername(username).get();
 
             Map<Object, Object> model = new HashMap<>();
+            model.put("id", m.getId());
             model.put("username", username);
             model.put("token", token);
             return ok(model);

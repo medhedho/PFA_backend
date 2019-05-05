@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface PublicationRepository extends JpaRepository<Publication,Long> {
-    @Query("SELECT p from Publication p join p.user u where u in ?1")
+    @Query(value="SELECT p from Publication p join p.user u where u in ?1", nativeQuery = true)
     List<Publication> findFollowingPublication(User user);
 }

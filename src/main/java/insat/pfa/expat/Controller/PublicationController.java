@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping({"/publications"})
+@CrossOrigin(origins = "*")
 public class PublicationController {
 
     @Autowired

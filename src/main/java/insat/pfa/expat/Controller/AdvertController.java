@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping({"/adverts"})
-
+@CrossOrigin(origins = "*")
 public class AdvertController {
     @Autowired
     AdvertBusiness advertBusiness;
@@ -33,9 +33,9 @@ public class AdvertController {
         return advertBusiness.findById(id);
     }
 
-    @PostMapping
-    public Advert createAdvert(@RequestBody Advert advert){
-        return advertBusiness.createAdvert(advert);
+    @PostMapping({"/{userid}"})
+    public Advert createAdvert(@PathVariable long userid,@RequestBody Advert advert){
+        return advertBusiness.createAdvert(advert,userid);
     }
 
     @PutMapping(value="/{id}")

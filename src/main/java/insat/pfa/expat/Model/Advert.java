@@ -38,4 +38,11 @@ public class Advert implements Serializable{
     @OneToMany(cascade=CascadeType.ALL)
     private List<Comment> comments;
 
+    public Advert(User user, String content, String location, String type) {
+        this.user = user;
+        this.createdAt = new Date();
+        this.content = content;
+        this.location = location;
+        this.type = type;
+    }
 }

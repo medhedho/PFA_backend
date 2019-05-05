@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping({"/signalAdverts"})
+@CrossOrigin(origins = "*")
 public class SignalAdvertController {
 
     @Autowired

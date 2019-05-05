@@ -4,6 +4,7 @@ import insat.pfa.expat.Model.User;
 import insat.pfa.expat.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -13,8 +14,12 @@ public class UserBusiness {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-    public User createUser(User user){
+
+    public User createUser(User u){
+        User user = new User(u.getUsername(),u.getBirthDate(),u.getNativeCountry(),u.getResidenceCountry(),u.getTel(),u.getEmail(),passwordEncoder.encode(u.getPassword()),u.getRoles());
         return userRepository.save(user);
     }
 

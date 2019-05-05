@@ -1,6 +1,8 @@
 package insat.pfa.expat.Controller;
 
 
+import insat.pfa.expat.Repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,9 +19,13 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController()
 public class UserinfoController {
 
+    @Autowired
+    UserRepository userRepository;
+
     @GetMapping("/me")
     public ResponseEntity currentUser(@AuthenticationPrincipal UserDetails userDetails){
         Map<Object, Object> model = new HashMap<>();
+        model.put("id",userRepository.findByUsername(userDetails.getUsername()).get().getId());
         model.put("username", userDetails.getUsername());
         model.put("roles", userDetails.getAuthorities()
                 .stream()

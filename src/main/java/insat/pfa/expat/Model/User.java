@@ -54,17 +54,28 @@ public class User implements Serializable, UserDetails {
     private String status;
 
     @OneToMany
-    //@LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<User> following;
 
     @OneToMany
-    //@LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<User> followers;
 
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
+
+    public User(String username, Date birthDate, String nativeCountry, String residenceCountry, String tel, String email, String password, List<String> roles) {
+        this.username = username;
+        this.birthDate = birthDate;
+        this.nativeCountry = nativeCountry;
+        this.residenceCountry = residenceCountry;
+        this.tel = tel;
+        this.email = email;
+        this.password = password;
+        this.roles=roles;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

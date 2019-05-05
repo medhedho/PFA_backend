@@ -1,9 +1,6 @@
 package insat.pfa.expat;
 
-import insat.pfa.expat.Model.User;
-import insat.pfa.expat.Model.Vehicle;
 import insat.pfa.expat.Repository.UserRepository;
-import insat.pfa.expat.Repository.VehicleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,14 +8,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-
 @Component
 @Slf4j
 public class DataInitializer implements CommandLineRunner {
-
-    @Autowired
-    VehicleRepository vehicles;
 
     @Autowired
     UserRepository users;
@@ -28,7 +20,7 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.debug("initializing vehicles data...");
+        /*log.debug("initializing vehicles data...");
         Arrays.asList("moto", "car").forEach(v -> this.vehicles.saveAndFlush(Vehicle.builder().name(v).build()));
 
         log.debug("printing all vehicles...");
@@ -49,6 +41,6 @@ public class DataInitializer implements CommandLineRunner {
         );
 
         log.debug("printing all users...");
-        this.users.findAll().forEach(v -> log.debug(" User :" + v.toString()));
+        this.users.findAll().forEach(v -> log.debug(" User :" + v.toString()));*/
     }
 }
