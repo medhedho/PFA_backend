@@ -16,6 +16,8 @@ public class Publication implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
     @Column(nullable = false, updatable = false)
@@ -33,8 +35,8 @@ public class Publication implements Serializable{
     @OneToMany
     private List<User> likes;
 
-    @Enumerated(EnumType.STRING)
-    private TypePublication type;
+
+    private String type;
 
     @OneToMany
     private List<Comment> comments;

@@ -33,9 +33,9 @@ public class AdvertController {
         return advertBusiness.findById(id);
     }
 
-    @PostMapping({"/{userid}"})
-    public Advert createAdvert(@PathVariable long userid,@RequestBody Advert advert){
-        return advertBusiness.createAdvert(advert,userid);
+    @PostMapping({"/{userId}"})
+    public Advert createAdvert(@PathVariable long userId,@RequestBody Advert advert){
+        return advertBusiness.createAdvert(advert,userId);
     }
 
     @PutMapping(value="/{id}")

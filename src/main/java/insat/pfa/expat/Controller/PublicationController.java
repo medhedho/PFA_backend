@@ -17,25 +17,25 @@ public class PublicationController {
     @Autowired
     PublicationBusiness publicationBusiness;
 
-  /*  @GetMapping
+    @GetMapping
     public List findAll(){
         return publicationBusiness.findAll();
     }
-*/
+
     @GetMapping(path = {"/{id}"})
     public ResponseEntity<Publication> findById(@PathVariable long id){
         return publicationBusiness.findById(id);
     }
 
    //Retourne tous les publications des following d'un utilisateur
-   /* @GetMapping
-    public List findAll(@RequestBody User user){
-        return publicationBusiness.findFollowingPublications(user);
-    }*/
+   @GetMapping(path = {"/PubOfFollowers/{idUser}"})
+    public /*List */ void findAllPubOfFollowers(@PathVariable long idUser){
+         publicationBusiness.findFollowingPublications(idUser);
+    }
 
-    @PostMapping
-    public Publication createPublication(@RequestBody Publication publication){
-        return publicationBusiness.createPublication(publication);
+    @PostMapping({"/{userId}"})
+    public Publication createPublication(@PathVariable long userId,@RequestBody Publication publication){
+        return publicationBusiness.createPublication(publication,userId);
     }
     @PostMapping(value="/like/{idPub}/{idUser}")
     public ResponseEntity<Publication> addLikeToPub(@PathVariable("idPub") long id1, @PathVariable("idUser") long id2){

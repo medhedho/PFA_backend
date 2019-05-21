@@ -21,7 +21,7 @@ import static java.util.stream.Collectors.toList;
 @Entity
 @Getter
 @Setter
-@Data
+//@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -53,12 +53,10 @@ public class User implements Serializable, UserDetails {
 
     private String status;
 
-    @OneToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<User> following;
 
-    @OneToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<User> followers;
 
 

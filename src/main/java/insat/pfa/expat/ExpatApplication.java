@@ -1,26 +1,25 @@
 package insat.pfa.expat;
 
-import insat.pfa.expat.Model.Advert;
-import insat.pfa.expat.Model.Publication;
-import insat.pfa.expat.Model.TypePublication;
 import insat.pfa.expat.Model.User;
-import insat.pfa.expat.Repository.AdvertRepository;
-import insat.pfa.expat.Repository.PublicationRepository;
 import insat.pfa.expat.Repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.LongStream;
 
@@ -36,9 +35,9 @@ public class ExpatApplication {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
 
-
-	/*@Bean
-	CommandLineRunner init(UserRepository repository) {
+/*
+	@Bean
+    CommandLineRunner init(UserRepository repository) {
 		return args -> {
 			repository.deleteAll();
 			LongStream.range(1, 11)
@@ -48,9 +47,12 @@ public class ExpatApplication {
 						u.setTel("465632652");
 						u.setStatus("User");
 						u.setNativeCountry("Tunisia");
-						u.setAdress("Paris");
+						u.setResidenceCountry("Paris,France");
 						u.setBirthDate(new Date(1996,6,15));
 						u.setEmail("kallelrym@ieee.org");
+                        List<String> l=new ArrayList<String>();
+                        l.add("ADMIN");
+						u.setRoles(l);
 						return u;
 					})
 					.map(v -> repository.save(v))

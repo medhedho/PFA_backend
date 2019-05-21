@@ -4,10 +4,15 @@ import insat.pfa.expat.Model.Publication;
 import insat.pfa.expat.Model.User;
 import insat.pfa.expat.Repository.PublicationRepository;
 import insat.pfa.expat.Repository.UserRepository;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,7 +25,13 @@ public class PublicationBusiness {
     UserRepository userRepository;
 
 
-    public Publication createPublication(Publication publication){
+
+
+    public Publication createPublication(Publication publication,long userId){
+        User user=userRepository.getOne(userId);
+        System.out.println(user);
+        publication.setUser(user);
+        publication.setCreatedAt(new Date());
         return publicationRepository.save(publication);
     }
 
@@ -64,7 +75,26 @@ public class PublicationBusiness {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
-   /* public List<Publication> findFollowingPublications(User user) {
-        return publicationRepository.findFollowingPublication(user);
-    }*/
+   public /*List<Publication> */ void findFollowingPublications(Long idUser) {
+      /* List<Publication> publications= new ArrayList<>();
+       User user=userRepository.getOne(idUser);
+       List<Long> listFollowing =user.getFollowing();
+       for (long i: listFollowing) {
+
+             publicationRepository.findPublicationsOfUser(i);
+       }
+       System.out.println(listFollowing);*/
+      /* List<Publication> publications= new ArrayList<>();
+       List<BigInteger> list=publicationRepository.findFollowingPublication(idUser);
+
+       for(int i=0; i < list.size(); i++) {
+           BigInteger element = list.get(i);
+            Publication p=publicationRepository.getOne(element.longValue());
+            publications.add(p);
+
+       }
+       System.out.println(publications);
+        return publications;
+        //return publicationRepository.findFollowingPublication(idUser);*/
+    }
 }

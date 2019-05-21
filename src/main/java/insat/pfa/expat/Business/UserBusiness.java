@@ -50,8 +50,8 @@ public class UserBusiness {
 
     public void addFollowing(Long idUser, Long idUserToFollow){
 
-                    User user=userRepository.findById(idUser).orElse(null);
-                    User userToFollow=userRepository.findById(idUserToFollow).orElse(null);
+                    User user=userRepository.getOne(idUser);
+                    User userToFollow=userRepository.getOne(idUserToFollow);
                     List<User> list =user.getFollowing();
                     List<User> listUserToFollow =userToFollow.getFollowers();
                     list.add(userToFollow);

@@ -21,9 +21,10 @@ public class AdvertBusiness {
     @Autowired
     UserRepository userRepository;
 
-    public Advert createAdvert(Advert a, long userid){
-        Advert advert = new Advert(userRepository.getOne(userid),a.getContent(),a.getLocation(),a.getType());
-        return advertRepository.save(advert);
+    public Advert createAdvert(Advert advert, long userId){
+       advert.setUser(userRepository.getOne(userId));
+       advert.setCreatedAt(new Date());
+       return advertRepository.save(advert);
     }
 
     public ResponseEntity<Advert> findById(long id){
