@@ -31,6 +31,15 @@ public class UserBusiness {
 
     public List findAll(){ return userRepository.findAll(); }
 
+    public List findFollowers(long id){
+        User user = userRepository.getOne(id);
+        return user.getFollowers();
+    }
+
+    public List findFollowing(long id){
+        User user = userRepository.getOne(id);
+        return user.getFollowing();
+    }
 
     public ResponseEntity<User> updateUser(long id, User user){
         return userRepository.findById(id)

@@ -21,6 +21,14 @@ public class UserController {
         return userBusiness.findAll();
     }
 
+    @GetMapping(path = {"/{id}/followers"})
+    public List findFollowers(@PathVariable long id) { return userBusiness.findFollowers(id); }
+
+    @GetMapping(path = {"/{id}/following"})
+    public List findFollowing(@PathVariable long id){
+        return userBusiness.findFollowing(id);
+    }
+
     @GetMapping(path = {"/{id}"})
     public ResponseEntity<User> findById(@PathVariable long id){
         return userBusiness.findById(id);
