@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -44,12 +46,22 @@ public class MessageBusiness {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
-    /*public ResponseEntity<List<Message>> findByUsers(long idUser1,long idUser2)
+    public List<Message> findByUsers(long idUser1,long idUser2)
     {
-
         User user1 =userRepository.findById(idUser1).orElse(null);
         User user2 =userRepository.findById(idUser2).orElse(null);
-        Message messageUser1=messageRepository
-    }*/
+        List<Message> senderUser1=messageRepository.findBySenderAndAndReceiver(user1,user2);
+        List<Message> senderUser2=messageRepository.findBySenderAndAndReceiver(user2,user1);
+        senderUser1.addAll(senderUser2);
+        Collections.sort(senderUser1,new CustomComparator());
+        return senderUser1;
+    }
 
+}
+
+ class CustomComparator implements Comparator<Message> {
+    @Override
+    public int compare(Message o1, Message o2) {
+        return o1.getCreatedAt().compareTo(o2.getCreatedAt());
+    }
 }

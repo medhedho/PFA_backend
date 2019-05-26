@@ -1,6 +1,9 @@
 package insat.pfa.expat;
 
+import insat.pfa.expat.Business.MessageBusiness;
+import insat.pfa.expat.Model.Message;
 import insat.pfa.expat.Model.User;
+import insat.pfa.expat.Repository.MessageRepository;
 import insat.pfa.expat.Repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,10 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.LongStream;
 
 @SpringBootApplication
@@ -35,6 +35,40 @@ public class ExpatApplication {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
 
+	@Bean
+	CommandLineRunner init(UserRepository userRepository, MessageRepository messageRepository) {
+		return args -> {
+			User user1 = new User("username1", new Date(), null, null, null, "email1", "password1", null);
+			User user2 = new User("username2", new Date(), null, null, null, "email2", "password2", null);
+			User user3 = new User("username3", new Date(), null, null, null, "email3", "password3", null);
+			userRepository.save(user1);userRepository.save(user2);userRepository.save(user3);
+			Message msg1 = new Message(user1,user2,"Hi");
+			Message msg2 = new Message(user2,user1,"Hello");
+			Message msg3 = new Message(user1,user2,"What's up");
+			Message msg4 = new Message(user2,user1,"Fine");
+			Message msg5 = new Message(user3,user1,"WOW");
+			messageRepository.save(msg2);messageRepository.save(msg3);messageRepository.save(msg1);messageRepository.save(msg5);messageRepository.save(msg4);
+			System.out.println("msg1 : " + msg1.getCreatedAt());
+			System.out.println("msg2 : " + msg2.getCreatedAt());
+			System.out.println("msg3 : " + msg3.getCreatedAt());
+			System.out.println("msg4 : " + msg4.getCreatedAt());
+			MessageBusiness messageBusiness = new MessageBusiness();
+			List <Message> msgs = messageBusiness.findByUsers(user1.getId(),user2.getId());
+			Iterator<Message> iterator = msgs.iterator();
+			while (iterator.hasNext()){
+				Message ms = iterator.next();
+				System.out.println(ms.getContent());
+			}
+
+
+
+
+
+
+
+
+		};
+	}
 /*
 	@Bean
     CommandLineRunner init(UserRepository repository) {
