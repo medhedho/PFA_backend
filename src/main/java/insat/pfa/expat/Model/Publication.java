@@ -41,4 +41,12 @@ public class Publication implements Serializable{
     @OneToMany
     private List<Comment> comments;
 
+    public Publication(User user, String content, List<String> photo, String video, String type) {
+        this.user = user;
+        this.createdAt = new Date();
+        this.content = content;
+        this.photo = photo;
+        this.video = video;
+        this.type = type;
+    }
 }

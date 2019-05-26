@@ -36,5 +36,10 @@ public class MessageController {
         return messageBusiness.updateMessage(id,message);
     }
 
+    @GetMapping(value="/{id1}/{id2}")
+    public List findByUsers(@PathVariable long id1, @PathVariable long id2){
+        return messageBusiness.findByUsers(id1,id2);
+    }
+
 
 }

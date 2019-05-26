@@ -48,10 +48,6 @@ public class User implements Serializable, UserDetails {
 
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private TypeUser role;
-
-
     private String status;
 
     @OneToMany(cascade = CascadeType.ALL)
