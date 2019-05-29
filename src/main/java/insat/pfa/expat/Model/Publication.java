@@ -27,8 +27,10 @@ public class Publication implements Serializable{
 
     private String content;
 
-    @ElementCollection
-    private List<String> photo;
+    //@ElementCollection
+    @Column(columnDefinition = "TEXT", length=65535)
+    @org.hibernate.annotations.Type( type = "text" )
+    private String photo;
 
     private String video;
 
@@ -41,7 +43,7 @@ public class Publication implements Serializable{
     @OneToMany
     private List<Comment> comments;
 
-    public Publication(User user, String content, List<String> photo, String video, String type) {
+    public Publication(User user, String content, String photo, String video, String type) {
         this.user = user;
         this.createdAt = new Date();
         this.content = content;

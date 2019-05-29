@@ -46,12 +46,10 @@ public class UserBusiness {
                 .map(record -> {
                     record.setUsername(user.getUsername());
                     record.setEmail(user.getEmail());
-
                     record.setBirthDate(user.getBirthDate());
                     record.setNativeCountry(user.getNativeCountry());
-                    record.setStatus(user.getStatus());
+                    record.setPhoto(user.getPhoto());
                     record.setTel(user.getTel());
-
                     User updated = userRepository.save(record);
                     return ResponseEntity.ok().body(updated);
                 }).orElse(ResponseEntity.notFound().build());

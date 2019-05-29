@@ -48,7 +48,9 @@ public class User implements Serializable, UserDetails {
 
     private String password;
 
-    private String status;
+    @Column(columnDefinition = "TEXT", length=65535)
+    @org.hibernate.annotations.Type( type = "text" )
+    private String photo;
 
     @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)

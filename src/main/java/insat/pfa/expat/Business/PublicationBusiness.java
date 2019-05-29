@@ -50,7 +50,6 @@ public class PublicationBusiness {
                     record.setUser(publication.getUser());
                     record.setCreatedAt(publication.getCreatedAt());
                     record.setContent(publication.getContent());
-
                     record.setPhoto(publication.getPhoto());
                     record.setVideo(publication.getVideo());
                     record.setLikes(publication.getLikes());

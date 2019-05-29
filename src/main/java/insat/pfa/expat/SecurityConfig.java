@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/signin").permitAll()
                 .antMatchers(HttpMethod.POST,"/users").permitAll()
                 .antMatchers(HttpMethod.GET, "/users/**","/search/**","/adverts/**","/comments/**","/events/**","/messages/**","/publications/**","/signalAdverts","/signalPersons","/signalPublications").permitAll()
+                .antMatchers(HttpMethod.POST, "/comments/**","/messages/**","/publications/**","/signalAdverts","/signalPersons","/signalPublications").hasRole("EXPAT")
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
