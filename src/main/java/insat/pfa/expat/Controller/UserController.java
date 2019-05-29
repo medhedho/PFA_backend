@@ -45,7 +45,7 @@ public class UserController {
     }
 
 
-    @PutMapping(value = "/{idUser}/Follow/{idUserToFollow}" )
+    @PostMapping(value = "/{idUser}/Follow/{idUserToFollow}" )
     public void addFollowing(@PathVariable("idUser")Long idUser, @PathVariable("idUserToFollow")Long idUserToFollow){
         userBusiness.addFollowing(idUser,idUserToFollow);
     }
