@@ -26,9 +26,9 @@ public class EventController {
         return eventBusiness.findById(id);
     }
 
-    @PostMapping
-    public Event createEvent(@RequestBody Event event){
-        return eventBusiness.createEvent(event);
+    @PostMapping("/{id}")
+    public Event createEvent(@PathVariable long id, @RequestBody Event event){
+        return eventBusiness.createEvent(id, event);
     }
     @PostMapping(value="/like/{idEvent}/{idUser}")
     public ResponseEntity<Event> addLikeToEvent(@PathVariable("idEvent") long id1, @PathVariable("idUser") long id2){

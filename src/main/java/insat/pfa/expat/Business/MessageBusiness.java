@@ -21,8 +21,9 @@ public class MessageBusiness {
     private UserRepository userRepository;
 
 
-    public Message createMessage(Message message){
-        return messageRepository.save(message);
+    public Message createMessage(Message message, long id1, long id2){
+        Message m = new Message(userRepository.getOne(id1),userRepository.getOne(id2),message.getContent());
+        return messageRepository.save(m);
     }
 
     public ResponseEntity<Message> findById(long id){

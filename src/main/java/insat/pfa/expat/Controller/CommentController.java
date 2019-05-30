@@ -3,6 +3,7 @@ package insat.pfa.expat.Controller;
 import insat.pfa.expat.Business.CommentBusiness;
 import insat.pfa.expat.Model.Advert;
 import insat.pfa.expat.Model.Comment;
+import insat.pfa.expat.Model.Event;
 import insat.pfa.expat.Model.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -40,14 +41,19 @@ public class CommentController {
         return commentBusiness.updateComment(id,comment);
     }
 
-    @PostMapping(value="/advert/{id1}/{id2}/{date}/{content}")
-    public ResponseEntity<Advert> addCommentToAdvert(@PathVariable("id1") long id1, @PathVariable("id2") long id2 , @PathVariable("date")   @DateTimeFormat(pattern="MMddyyyy") Date date, @PathVariable("content") String c){
-        return commentBusiness.addCommentToAdvert(id1,id2,date,c);
+    @PostMapping(value="/advert/{id1}/{id2}")
+    public ResponseEntity<Advert> addCommentToAdvert(@PathVariable("id1") long id1, @PathVariable("id2") long id2, @RequestBody Comment c){
+        return commentBusiness.addCommentToAdvert(id1,id2,c.getContent());
     }
 
-    @PostMapping(value="/publication/{id1}/{id2}/{date}/{content}")
-    public ResponseEntity<Publication> addCommentToPublication(@PathVariable("id1") long id1, @PathVariable("id2") long id2 , @PathVariable("date")   @DateTimeFormat(pattern="MMddyyyy") Date date, @PathVariable("content") String c){
-        return commentBusiness.addCommentToPublication(id1,id2,date,c);
+    @PostMapping(value="/publication/{id1}/{id2}")
+    public ResponseEntity<Publication> addCommentToPublication(@PathVariable("id1") long id1, @PathVariable("id2") long id2 , @RequestBody Comment c){
+        return commentBusiness.addCommentToPublication(id1,id2,c.getContent());
+    }
+
+    @PostMapping(value="/event/{id1}/{id2}")
+    public ResponseEntity<Event> addCommentToEvent(@PathVariable("id1") long id1, @PathVariable("id2") long id2, @RequestBody Comment c){
+        return commentBusiness.addCommentToEvent(id1,id2,c.getContent());
     }
 
     @PostMapping(value="/like/{idComment}/{idUser}")

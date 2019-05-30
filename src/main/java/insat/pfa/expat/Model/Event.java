@@ -35,9 +35,7 @@ public class Event implements Serializable{
 
     private String content;
 
-    private String photo;
-
-    private String video;
+    private String type;
 
     @OneToMany
     private List<User> participants;
@@ -45,4 +43,12 @@ public class Event implements Serializable{
     @OneToMany
     private List<Comment> comments;
 
+    public Event(User user, Date eventDate, String location, String content, String type) {
+        this.user = user;
+        this.createdAt = new Date();
+        this.eventDate = eventDate;
+        this.location = location;
+        this.content = content;
+        this.type = type;
+    }
 }

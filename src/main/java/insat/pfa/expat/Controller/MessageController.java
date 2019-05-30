@@ -26,9 +26,9 @@ public class MessageController {
         return messageBusiness.findById(id);
     }
 
-    @PostMapping
-    public Message createMessage(@RequestBody Message message){
-        return messageBusiness.createMessage(message);
+    @PostMapping(path = {"/new/{id1}/{id2}"})
+    public Message createMessage(@PathVariable long id1, @PathVariable long id2, @RequestBody Message message){
+        return messageBusiness.createMessage(message,id1,id2);
     }
 
     @PutMapping(value="/{id}")

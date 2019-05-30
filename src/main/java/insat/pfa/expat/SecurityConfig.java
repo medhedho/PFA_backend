@@ -40,8 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/signin").permitAll()
                 .antMatchers(HttpMethod.POST,"/users").permitAll()
                 .antMatchers(HttpMethod.GET, "/users/**","/search/**","/adverts/**","/comments/**","/events/**","/messages/**","/publications/**","/signalAdverts","/signalPersons","/signalPublications").permitAll()
-                //.antMatchers(HttpMethod.POST, "/comments/**","/messages/**","/publications/**","/signalAdverts","/signalPersons","/signalPublications").hasAuthority("ROLE_USER")
-                .antMatchers(HttpMethod.DELETE, "/users/**").hasAuthority("ROLE_ADMIN")
+                //.antMatchers(HttpMethod.POST, "/comments/**","/messages/**","/publications/**","/signalAdverts","/signalPersons","/signalPublications").hasAuthority("USER")
+                .antMatchers(HttpMethod.DELETE, "/users/**").hasAuthority("ADMIN")
+                //.antMatchers(HttpMethod.GET, "/signalAdverts/**","signalPersons","signalPublications").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));

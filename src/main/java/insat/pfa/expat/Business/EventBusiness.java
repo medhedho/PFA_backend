@@ -20,7 +20,8 @@ public class EventBusiness {
     UserRepository userRepository;
 
 
-    public Event createEvent(Event event){
+    public Event createEvent(long id, Event e){
+        Event event = new Event(userRepository.getOne(id),e.getEventDate(),e.getLocation(),e.getContent(),e.getType());
         return eventRepository.save(event);
     }
 
@@ -39,8 +40,8 @@ public class EventBusiness {
                     record.setUser(event.getUser());
                     record.setCreatedAt(event.getCreatedAt());
                     record.setContent(event.getContent());
-                    record.setPhoto(event.getPhoto());
-                    record.setVideo(event.getVideo());
+                    record.setType(event.getType());
+                    record.setLocation(event.getLocation());
                     record.setEventDate(event.getEventDate());
                     record.setParticipants(event.getParticipants());
                     record.setComments(event.getComments());

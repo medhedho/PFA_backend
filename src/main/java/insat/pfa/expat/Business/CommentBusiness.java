@@ -1,13 +1,7 @@
 package insat.pfa.expat.Business;
 
-import insat.pfa.expat.Model.Advert;
-import insat.pfa.expat.Model.Comment;
-import insat.pfa.expat.Model.Publication;
-import insat.pfa.expat.Model.User;
-import insat.pfa.expat.Repository.AdvertRepository;
-import insat.pfa.expat.Repository.CommentRepository;
-import insat.pfa.expat.Repository.PublicationRepository;
-import insat.pfa.expat.Repository.UserRepository;
+import insat.pfa.expat.Model.*;
+import insat.pfa.expat.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,6 +20,9 @@ public class CommentBusiness {
 
     @Autowired
     AdvertRepository advertRepository;
+
+    @Autowired
+    EventRepository eventRepository;
 
     @Autowired
     PublicationRepository publicationRepository;
@@ -57,14 +54,14 @@ public class CommentBusiness {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
-    public ResponseEntity<Advert> addCommentToAdvert(Long idAdvert, Long idUser, Date date, String c){
+    public ResponseEntity<Advert> addCommentToAdvert(Long idAdvert, Long idUser, String c){
         return advertRepository.findById(idAdvert)
                 .map(record -> {
                     User user=userRepository.findById(idUser).orElse(null);
                     List<Comment> listComment =record.getComments();
                     Comment comment =new Comment();
                     comment.setContent(c);
-                    comment.setCreatedAt(date);
+                    comment.setCreatedAt(new Date());
                     comment.setUser(user);
                     listComment.add(comment);
                     record.setComments(listComment);
@@ -73,14 +70,14 @@ public class CommentBusiness {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
-    public ResponseEntity<Publication> addCommentToPublication(Long idPub, Long idUser, Date date, String c){
+    public ResponseEntity<Publication> addCommentToPublication(Long idPub, Long idUser, String c){
         return publicationRepository.findById(idPub)
                 .map(record -> {
                     User user=userRepository.findById(idUser).orElse(null);
                     List<Comment> listComment =record.getComments();
                     Comment comment =new Comment();
                     comment.setContent(c);
-                    comment.setCreatedAt(date);
+                    comment.setCreatedAt(new Date());
                     comment.setUser(user);
                     listComment.add(comment);
                     record.setComments(listComment);
@@ -88,6 +85,24 @@ public class CommentBusiness {
                     return ResponseEntity.ok().body(updated);
                 }).orElse(ResponseEntity.notFound().build());
     }
+
+
+    public ResponseEntity<Event> addCommentToEvent(Long idPub, Long idUser, String c){
+        return eventRepository.findById(idPub)
+                .map(record -> {
+                    User user=userRepository.findById(idUser).orElse(null);
+                    List<Comment> listComment =record.getComments();
+                    Comment comment =new Comment();
+                    comment.setContent(c);
+                    comment.setCreatedAt(new Date());
+                    comment.setUser(user);
+                    listComment.add(comment);
+                    record.setComments(listComment);
+                    Event updated = eventRepository.save(record);
+                    return ResponseEntity.ok().body(updated);
+                }).orElse(ResponseEntity.notFound().build());
+    }
+
 
     public ResponseEntity<Comment> addLikeToComment(Long idComment, Long idUser){
         return commentRepository.findById(idComment)
