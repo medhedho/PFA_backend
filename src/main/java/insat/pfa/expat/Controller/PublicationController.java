@@ -46,6 +46,9 @@ public class PublicationController {
     public ResponseEntity<Publication> updatePublication(@PathVariable("id") long id, @RequestBody Publication publication){
         return publicationBusiness.updatePublication(id,publication);
     }
-
+    @DeleteMapping("/{id}")
+    public void deletePub(@PathVariable long id) {
+        publicationBusiness.deleteById(id);
+    }
 
 }

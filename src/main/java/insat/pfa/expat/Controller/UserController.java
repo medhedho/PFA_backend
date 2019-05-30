@@ -50,6 +50,11 @@ public class UserController {
         userBusiness.addFollowing(idUser,idUserToFollow);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable long id) {
+        userBusiness.deleteById(id);
+    }
+
 
 
 

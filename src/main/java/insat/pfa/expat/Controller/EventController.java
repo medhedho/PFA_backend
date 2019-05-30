@@ -40,5 +40,9 @@ public class EventController {
         return eventBusiness.updateEvent(id,event);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteEvent(@PathVariable long id) {
+        eventBusiness.deleteById(id);
+    }
 
 }

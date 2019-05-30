@@ -83,4 +83,8 @@ public class AdvertBusiness {
     }
 
 
+    public void deleteById(long id) {
+        advertRepository.deleteById(id);
+    }
+
 }

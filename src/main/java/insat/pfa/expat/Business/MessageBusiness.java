@@ -57,6 +57,9 @@ public class MessageBusiness {
         return senderUser1;
     }
 
+    public void deleteById(long id) {
+        messageRepository.deleteById(id);
+    }
 }
 
  class CustomComparator implements Comparator<Message> {

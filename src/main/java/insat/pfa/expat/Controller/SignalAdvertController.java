@@ -26,9 +26,13 @@ public class SignalAdvertController {
         return signalAdvertBusiness.findById(id);
     }
 
-    @PostMapping
-    public SignalAdvert createSignalAdvert(@RequestBody SignalAdvert signalAdvert){
-        return signalAdvertBusiness.createSignalAdvert(signalAdvert);
+    @PostMapping({"/{userId}/{advertId}"})
+    public SignalAdvert createSignalAdvert(@PathVariable long userId,@PathVariable long advertId,@RequestBody SignalAdvert signalAdvert){
+        return signalAdvertBusiness.createSignalAdvert(signalAdvert,userId,advertId);
+    }
+    @DeleteMapping("/{id}")
+    public void deleteSignalAdvert(@PathVariable long id) {
+        signalAdvertBusiness.deleteById(id);
     }
 
 }

@@ -48,6 +48,11 @@ public class AdvertController {
         return advertBusiness.addInterestToAdvert(id1,id2);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteAdvert(@PathVariable long id) {
+        advertBusiness.deleteById(id);
+    }
+
 
 
 }

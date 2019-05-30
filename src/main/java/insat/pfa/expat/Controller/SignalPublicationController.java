@@ -26,9 +26,14 @@ public class SignalPublicationController {
         return signalPublicationBusiness.findById(id);
     }
 
-    @PostMapping
-    public SignalPublication createSignalPublication(@RequestBody SignalPublication signalPublication){
-        return signalPublicationBusiness.createSignalPublication(signalPublication);
+    @PostMapping({"/{userId}/{pubId}"})
+    public SignalPublication createSignalAdvert(@PathVariable long userId,@PathVariable long pubId,@RequestBody SignalPublication signalAdvert){
+        return signalPublicationBusiness.createSignalPublication(signalAdvert,userId,pubId);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteSignalPub(@PathVariable long id) {
+        signalPublicationBusiness.deleteById(id);
     }
 
 }

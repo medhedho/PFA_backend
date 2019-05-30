@@ -103,5 +103,7 @@ public class CommentBusiness {
     }
 
 
-
+    public void deleteById(long id) {
+        commentRepository.deleteById(id);
+    }
 }

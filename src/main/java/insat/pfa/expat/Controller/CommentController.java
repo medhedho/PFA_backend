@@ -54,6 +54,10 @@ public class CommentController {
     public ResponseEntity<Comment> addLikeToComment(@PathVariable("idComment") long id1, @PathVariable("idUser") long id2){
         return commentBusiness.addLikeToComment(id1,id2);
     }
+    @DeleteMapping("/{id}")
+    public void deleteComment(@PathVariable long id) {
+        commentBusiness.deleteById(id);
+    }
 
 
 }

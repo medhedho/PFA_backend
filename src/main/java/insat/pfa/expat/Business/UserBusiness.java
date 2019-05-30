@@ -70,4 +70,7 @@ public class UserBusiness {
 
     }
 
+    public void deleteById(long id) {
+        userRepository.deleteById(id);
+    }
 }

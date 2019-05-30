@@ -63,4 +63,7 @@ public class EventBusiness {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
+    public void deleteById(long id) {
+        eventRepository.deleteById(id);
+    }
 }

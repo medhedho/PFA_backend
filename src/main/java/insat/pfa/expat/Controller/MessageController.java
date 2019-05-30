@@ -40,6 +40,9 @@ public class MessageController {
     public List findByUsers(@PathVariable long id1, @PathVariable long id2){
         return messageBusiness.findByUsers(id1,id2);
     }
-
+    @DeleteMapping("/{id}")
+    public void deleteMessage(@PathVariable long id) {
+        messageBusiness.deleteById(id);
+    }
 
 }

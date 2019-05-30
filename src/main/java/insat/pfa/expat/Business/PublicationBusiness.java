@@ -96,4 +96,8 @@ public class PublicationBusiness {
         return publications;
         //return publicationRepository.findFollowingPublication(idUser);*/
     }
+
+    public void deleteById(long id) {
+       publicationRepository.deleteById(id);
+    }
 }
