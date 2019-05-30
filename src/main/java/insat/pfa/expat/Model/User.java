@@ -42,6 +42,8 @@ public class User implements Serializable, UserDetails {
 
     private String residenceCountry;
 
+    private String address;
+
     private String tel;
 
     private String email;
@@ -67,20 +69,27 @@ public class User implements Serializable, UserDetails {
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
-    public User(String username, Date birthDate, String nativeCountry, String residenceCountry, String tel, String email, String password, List<String> roles) {
+    public User(String username, Date birthDate, String nativeCountry, String residenceCountry, String address, String tel, String email, String password, String photo, List<String> roles) {
         this.username = username;
         this.birthDate = birthDate;
         this.nativeCountry = nativeCountry;
         this.residenceCountry = residenceCountry;
+        this.address=address;
         this.tel = tel;
         this.email = email;
         this.password = password;
+        this.photo = photo;
         this.roles=roles;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream().map(SimpleGrantedAuthority::new).collect(toList());
+        //List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+        //authorities.add((new SimpleGrantedAuthority("ROLE_"+this.getRoles().get(0))));
+        //System.out.println("the roles " + this.getRoles().get(0));
+        //System.out.println("the autorities " + authorities.get(0).toString());
+        //return authorities;
     }
 
     @Override

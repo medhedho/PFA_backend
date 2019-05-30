@@ -31,6 +31,8 @@ public class Event implements Serializable{
     @CreatedDate
     private Date eventDate;
 
+    private String location;
+
     private String content;
 
     private String photo;

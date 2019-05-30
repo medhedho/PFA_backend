@@ -19,7 +19,7 @@ public class UserBusiness {
 
 
     public User createUser(User u){
-        User user = new User(u.getUsername(),u.getBirthDate(),u.getNativeCountry(),u.getResidenceCountry(),u.getTel(),u.getEmail(),passwordEncoder.encode(u.getPassword()),u.getRoles());
+        User user = new User(u.getUsername(),u.getBirthDate(),u.getNativeCountry(),u.getResidenceCountry(),u.getAddress(),u.getTel(),u.getEmail(),passwordEncoder.encode(u.getPassword()),u.getPhoto(),u.getRoles());
         return userRepository.save(user);
     }
 
